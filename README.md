@@ -271,7 +271,7 @@ EasyJob provides a modern and intelligent approach to online recruitment by comb
 ## Author
 
 **Hruthik R Salian**
-Bachelor of Engineering – Information Technology
+Bachelor of Technology – Computer Science and Engineering
 
 ---
 
