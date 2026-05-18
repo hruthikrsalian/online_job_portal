@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<div class="dashboard">
+  <h2>{{job[1]}} – {{job[2]}}</h2>
+  <div class="card">
+    <p>{{job[3]}}</p>
+    <p><b>Required Skills:</b> {{job[4]}}</p>
+
+    <form method="post" enctype="multipart/form-data">
+      <input name="skills" placeholder="Your Skills" required>
+      <input type="file" name="resume" required>
+      <button>Apply</button>
+    </form>
+  </div>
+</div>

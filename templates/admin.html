@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com – Admin Panel</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<div class="dashboard">
+
+<h2>HR Accounts</h2>
+<table width="100%" border="1" cellpadding="10">
+<tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+
+{% for h in hrs %}
+<tr>
+  <td>{{h[1]}}</td>
+  <td>{{h[2]}}</td>
+  <td>
+    {% if h[3] == 1 %} Approved
+    {% elif h[3] == 0 %} Pending
+    {% else %} Rejected
+    {% endif %}
+  </td>
+
+  <td>
+    <!-- PENDING HR -->
+    {% if h[3] == 0 %}
+      <a href="/admin_approve/{{h[0]}}">
+        <button>Approve</button>
+      </a>
+      <a href="/admin_reject/{{h[0]}}">
+        <button style="background:#dc2626;">Reject</button>
+      </a>
+    {% endif %}
+
+    <!-- APPROVED HR -->
+    {% if h[3] == 1 %}
+      <span style="color:green;font-weight:bold;">Active</span>
+      <a href="/admin_delete/{{h[0]}}">
+        <button style="background:#000;">Delete</button>
+      </a>
+    {% endif %}
+
+    <!-- REJECTED HR -->
+    {% if h[3] == -1 %}
+      <span style="color:red;font-weight:bold;">Rejected</span>
+      <a href="/admin_delete/{{h[0]}}">
+        <button style="background:#000;">Delete</button>
+      </a>
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+<br><br>
+
+<h2>Candidate Accounts</h2>
+<table width="100%" border="1" cellpadding="10">
+<tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Actions</th>
+</tr>
+
+{% for c in candidates %}
+<tr>
+  <td>{{c[1]}}</td>
+  <td>{{c[2]}}</td>
+  <td>
+    <a href="/admin_delete/{{c[0]}}">
+      <button style="background:#000;">Delete</button>
+    </a>
+  </td>
+</tr>
+{% endfor %}
+</table>
+
+</div>

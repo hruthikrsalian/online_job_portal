@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="dashboard">
+<h2>Resume Summary</h2>
+
+<div class="card">
+<b>Email:</b> {{summary.email}}<br><br>
+<b>Phone:</b> {{summary.phone}}<br><br>
+
+<b>Skills:</b><br>
+{% for s in summary.skills %}
+  <span class="skill-chip">{{s}}</span>
+{% endfor %}
+<br><br>
+
+<b>Education:</b>
+<p>{{summary.education}}</p>
+
+<b>Projects:</b>
+<p>{{summary.projects}}</p>
+
+<a href="javascript:history.back()">
+  <button>Back</button>
+</a>
+</div>
+</div>

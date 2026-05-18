@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<div class="dashboard">
+<h2>Welcome Candidate - {{session["u"][1]}}</h2>
+
+
+<h3>Available Jobs</h3>
+<div class="grid">
+{% for j in jobs %}
+<div class="card">
+  <b>COMPANY NAME : {{j[2]}}</b>
+  <p>ROLE: {{j[1]}}</p>
+  <p>DESCRIPTION : {{j[2]}}</p>
+  <a href="/job/{{j[0]}}">
+    <button>View Details & Apply</button>
+  </a>
+</div>
+{% endfor %}
+</div>
+
+<hr>
+
+<h3>Your Applications</h3>
+<div class="grid">
+{% for a in apps %}
+<div class="card">
+  <b>{{a[0]}}</b><br>   <!-- Company -->
+  <b>{{a[1]}}</b><br>   <!-- Role -->
+  Status: <b>{{a[2]}}</b><br><br>
+
+
+  {% if a[1] == "PENDING" %}
+    <p>Waiting for HR approval</p>
+  {% endif %}
+
+ {% if a[2] == "APPROVED" %}
+  <a href="/test/{{a[3]}}">
+    <button>Attempt Test</button>
+  </a>
+{% endif %}
+
+  {% if a[1] == "RESUME_REJECTED" %}
+    <p style="color:red;">Rejected after resume screening</p>
+  {% endif %}
+
+  {% if a[1] == "FINAL_REJECTED" %}
+    <p style="color:red;"><b>Not selected after test.</b></p>
+    <p>Check your email.</p>
+  {% endif %}
+
+  {% if a[1] == "SELECTED" %}
+    <p style="color:green;"><b>Congratulations! You are selected.</b></p>
+    <p>Check your email.</p>
+  {% endif %}
+</div>
+{% endfor %}
+</div>
+
+</div>

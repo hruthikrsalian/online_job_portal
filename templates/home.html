@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+
+  <div class="container glass">
+
+    <h1 class="hero-title">Welcome to EasyJob</h1>
+
+    {% if not mode %}
+      <button onclick="window.location='/?mode=login'">Login</button>
+      <button onclick="window.location='/?mode=register'">Register</button>
+    {% endif %}
+
+    <!-- LOGIN -->
+    {% if mode == "login" %}
+      <h3>Login</h3>
+      <form method="post">
+        <input type="hidden" name="action" value="login">
+
+        <input name="email" placeholder="Email" required>
+
+        <input name="password"
+               type="password"
+               placeholder="Password"
+               required>
+
+        <button>Login</button>
+      </form>
+
+      {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        <p>No account? <a href="/?mode=register">Register here</a></p>
+      {% endif %}
+    {% endif %}
+
+    <!-- REGISTER -->
+    {% if mode == "register" %}
+      <h3>Register</h3>
+      <form method="post">
+        <input type="hidden" name="action" value="register">
+
+        <input name="name" placeholder="Full Name" required>
+
+        <input name="email"
+               placeholder="Gmail only"
+               pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+               title="Enter valid Gmail address"
+               required>
+
+        <input name="password"
+               type="password"
+               placeholder="Strong password"
+               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
+               title="8+ chars with uppercase, lowercase, number & symbol"
+               required>
+
+        <select name="role">
+          <option value="hr">HR</option>
+          <option value="candidate">Candidate</option>
+        </select>
+
+        <button>Create Account</button>
+      </form>
+
+      {% if error %}
+        <p style="color:red;">{{ error }}</p>
+      {% endif %}
+    {% endif %}
+
+  </div>
+
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="about">
+
+  <h2>About EasyJob</h2>
+
+  <p>
+    EasyJob is an intelligent recruitment platform designed to bridge the
+    gap between talented candidates and forward-thinking companies.
+    Our system simplifies hiring using resume analysis, skill matching,
+    and automated assessments — helping organizations discover the right
+    talent faster.
+  </p>
+
+  <p>
+    For candidates, EasyJob provides a seamless job search experience with
+    transparent application tracking and skill-based evaluation.
+    For HR professionals, it offers powerful tools to manage hiring,
+    screen applicants, and streamline decision-making.
+  </p>
+
+  <p>
+    Whether you're starting your career journey or building a strong team,
+    EasyJob ensures efficiency, fairness, and innovation in every hiring step.
+  </p>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  📧 Contact us: <b>easyyyyjob123@gmail.com</b>
+</div>

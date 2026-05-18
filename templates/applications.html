@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+<a href="/hr" style="text-decoration:none;">
+  <button style="
+    width:auto;
+    padding:8px 16px;
+    margin-bottom:15px;
+    background:#475569;
+  ">
+    ← Back to HR Dashboard
+  </button>
+</a>
+
+
+<div class="dashboard">
+<h2>Applicants</h2>
+
+<div class="grid">
+{% for a in apps %}
+<div class="card">
+  <b>{{a[1]}}</b><br><br>
+
+  <b>Skills:</b> {{a[2]}}<br><br>
+
+  <a href="/static/resumes/{{a[3]}}" target="_blank">
+    View Resume
+  </a>
+  <a href="/resume_details/{{a[0]}}">
+  <button>Fetch Resume Details</button>
+</a><br><br>
+
+  <b>All Skills Found in Resume:</b><br>
+{% for s in a[6].split(",") %}
+  <span style="
+    display:inline-block;
+    padding:6px 12px;
+    margin:4px;
+    border-radius:20px;
+    background:#3b82f6;
+    color:white;
+    font-size:13px;
+  ">
+    {{s}}
+  </span>
+{% endfor %}
+<br><br>
+
+
+  <b>Status:</b> {{a[4]}}<br>
+  <b>Resume Match:</b> {{a[5]}} %<br>
+<b>Test Score:</b> {{a[7]}} / 25
+  <a href="/match/{{a[0]}}">
+  <button>View Matching</button>
+</a><br><br>
+
+
+
+  <!-- RESUME SCREENING STAGE -->
+  {% if a[4] == "PENDING" %}
+    <p>Resume not reviewed yet</p>
+
+    {% if a[5] >= 50 %}
+      <a href="/approve_app/{{a[0]}}">
+        <button>Approve</button>
+      </a>
+    {% endif %}
+
+    <a href="/reject_app/{{a[0]}}">
+      <button>Reject</button>
+    </a>
+  {% endif %}
+
+  <!-- FINAL DECISION STAGE -->
+  {% if a[4] == "APPROVED" and a[6] != "Not Attempted" %}
+    <p>Final Decision</p>
+    <a href="/final_select/{{a[0]}}/{{jid}}">
+      <button>Select Candidate</button>
+    </a>
+    <a href="/final_reject/{{a[0]}}/{{jid}}">
+      <button>Reject Candidate</button>
+    </a>
+  {% endif %}
+
+  {% if a[4] == "SELECTED" %}
+    <p style="color:green;"><b>Candidate Selected</b></p>
+  {% endif %}
+
+  {% if a[4] == "FINAL_REJECTED" %}
+    <p style="color:red;"><b>Candidate Rejected</b></p>
+  {% endif %}
+</div>
+{% endfor %}
+</div>
+</div>

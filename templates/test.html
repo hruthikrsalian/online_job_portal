@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/test.js" defer></script>
+<div id="fsOverlay" style="
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:#000;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  flex-direction:column;
+">
+  <h2>Full Screen Required</h2>
+  <p>This test must be taken in full-screen mode.</p>
+  <button onclick="startTest()">Start Test</button>
+</div>
+
+<div class="nav">
+  <b>easyjob.com – Online Test</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<h2 align="center">Aptitude Test</h2>
+<p class="timer" id="timer"></p>
+
+<div class="exam-layout">
+
+  <!-- MAIN QUESTION -->
+  <div class="question-area">
+    <h3 id="questionNumber"></h3>
+    <p id="questionText"></p>
+
+   <div class="option">
+  <input type="radio" name="answer" value="a">
+  <div class="opt-label">A</div>
+  <div class="opt-text" id="optA"></div>
+</div>
+
+<div class="option">
+  <input type="radio" name="answer" value="b">
+  <div class="opt-label">B</div>
+  <div class="opt-text" id="optB"></div>
+</div>
+
+<div class="option">
+  <input type="radio" name="answer" value="c">
+  <div class="opt-label">C</div>
+  <div class="opt-text" id="optC"></div>
+</div>
+
+<div class="option">
+  <input type="radio" name="answer" value="d">
+  <div class="opt-label">D</div>
+  <div class="opt-text" id="optD"></div>
+</div>
+
+
+    <div style="margin-top:15px;">
+      <button onclick="prevQuestion()">Prev</button>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <!-- QUESTION PALETTE -->
+  <div class="palette">
+    <h4>Questions</h4>
+    <div id="paletteBoxes"></div>
+  </div>
+
+</div>
+
+<form action="/submit" method="post" id="testForm">
+  <div id="hiddenAnswers"></div>
+  <button type="submit" style="margin-top:20px;">Submit Test</button>
+</form>

@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<div class="dashboard">
+<h2>Welcome HR-{{session["u"][1]}}</h2>
+
+
+<!-- POST JOB -->
+<div class="card">
+<form method="post">
+  <input name="company" placeholder="Company Name" required>
+  <input name="title" placeholder="Job Title" required>
+  <input name="desc" placeholder="Description" required>
+  <input name="skills" placeholder="Required Skills (comma separated)" required>
+  <button>Post Job</button>
+</form>
+
+</div>
+
+<h3>Posted Jobs</h3>
+<div class="grid">
+{% for j in jobs %}
+<div class="card">
+  <b>COMPANY NAME : {{j[2]}}</b>
+  <p>ROLE : {{j[1]}}</p>
+<p>{{j[3]}}</p>
+
+  <p><b>Required Skills:</b> {{j[4]}}</p>
+
+  <a href="/applications/{{j[0]}}">
+    <button>View Applicants</button>
+  </a>
+   <a href="/edit_job/{{j[0]}}">
+    <button>Edit</button>
+  </a>
+
+  <a href="/delete_job/{{j[0]}}">
+    <button style="background:red;">Delete</button>
+  </a>
+</div>
+{% endfor %}
+</div>
+
+</div>

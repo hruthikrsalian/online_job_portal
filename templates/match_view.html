@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="nav">
+  <b>Skill Matching Dashboard</b>
+  <a href="javascript:history.back()">Back</a>
+</div>
+<div style="width:900px;margin:30px auto;display:flex;gap:40px;">
+
+  <div style="flex:1;">
+    <h3>Required Skills</h3>
+    {% for s in skill_data %}
+      <span style="
+        display:inline-block;
+        padding:6px 12px;
+        margin:5px;
+        border-radius:20px;
+        background:#e5e7eb;
+        color:#111;
+        font-size:14px;
+      ">
+        {{s.skill}}
+      </span>
+    {% endfor %}
+  </div>
+
+  <div style="flex:1;">
+    <h3>Matched From Resume</h3>
+    {% for s in skill_data %}
+      {% if s.value == 100 %}
+        <span style="
+          display:inline-block;
+          padding:6px 12px;
+          margin:5px;
+          border-radius:20px;
+          background:#22c55e;
+          color:white;
+          font-size:14px;
+        ">
+          {{s.skill}}
+        </span>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
+
+<!-- Hidden data (HTML only, not JS) -->
+<div id="data"
+     data-matched="{{matched}}"
+     data-total="{{total}}"
+     data-skills="{% for s in skill_data %}{{s.skill}}|{% endfor %}"
+     data-values="{% for s in skill_data %}{{s.value}}|{% endfor %}">
+</div>
+
+<div style="width:700px;margin:40px auto;">
+  <canvas id="overallChart"></canvas>
+</div>
+
+<div style="width:900px;margin:40px auto;">
+  <canvas id="skillChart"></canvas>
+</div>
+
+<script>
+const box = document.getElementById("data");
+
+const matched = parseInt(box.dataset.matched);
+const total = parseInt(box.dataset.total);
+
+const skills = box.dataset.skills.split("|").filter(x => x);
+const values = box.dataset.values.split("|").filter(x => x).map(Number);
+
+/* Overall chart */
+new Chart(document.getElementById("overallChart"), {
+  type: "bar",
+  data: {
+    labels: ["Matched", "Unmatched"],
+    datasets: [{
+      data: [matched, total - matched],
+      backgroundColor: ["#22c55e", "#ef4444"]
+    }]
+  }
+});
+
+/* Skill-wise chart */
+new Chart(document.getElementById("skillChart"), {
+  type: "bar",
+  data: {
+    labels: skills,
+    datasets: [{
+      label: "Skill Match %",
+      data: values,
+      backgroundColor: "#3b82f6"
+    }]
+  },
+  options: {
+    scales: {
+      y: { min: 0, max: 100 }
+    }
+  }
+});
+</script>

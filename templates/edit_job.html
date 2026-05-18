@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<div class="nav">
+  <b>easyjob.com</b>
+  <a href="/logout">Logout</a>
+</div>
+
+<div class="container">
+<h2>Edit Job</h2>
+
+<form method="post">
+  <input name="company" value="{{job[2]}}" required>
+  <input name="title" value="{{job[1]}}" required>
+  <input name="desc" value="{{job[3]}}" required>
+  <input name="skills" value="{{job[4]}}" required>
+  <button>Update Job</button>
+</form>
+</div>
